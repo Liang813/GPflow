@@ -1,5 +1,7 @@
 import tensorflow as tf
 from gpflow.quadrature import ndiag_mc
+import tsensor
+
 try:
     N = 10
     X_dim = 2
@@ -17,8 +19,8 @@ try:
     Y = tf.random_normal((N, Y_dim), dtype=tf.float64)
 
     Ez = ndiag_mc(func, 1000, Z_mu, Z_var, logspace=False, X=X, Y=Y)
-
-    print(tf.Session().run(Ez))
+    with tsensor.clarify():
+        print(tf.Session().run(Ez))
 except Exception as e:
     print("ValueError")
     print(e)
