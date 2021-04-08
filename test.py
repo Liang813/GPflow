@@ -1,7 +1,7 @@
 import tensorflow as tf
 from gpflow.quadrature import ndiag_mc
 import tsensor
-
+import traceback
 try:
     N = 10
     X_dim = 2
@@ -22,5 +22,4 @@ try:
     with tsensor.clarify():
         print(tf.Session().run(Ez))
 except Exception as e:
-    print("ValueError")
-    print(e)
+    traceback.print_exc(file=open('/script/gpflow813-buggy.txt','w+'))
