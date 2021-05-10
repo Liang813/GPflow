@@ -24,7 +24,7 @@ def gauss_kl_white(q_mu, q_sqrt, num_latent):
     KL = 0.5 * tf.reduce_sum(tf.square(q_mu))  # Mahalanobis term
     KL += -0.5 * tf.cast(tf.shape(q_sqrt)[0] * num_latent, tf.float64)
     for d in range(num_latent):
-        Lq = tf.batch_matrix_band_part(q_sqrt[:, :, d], -1, 0)
+        Lq = tf.matrix_band_part(q_sqrt[:, :, d], -1, 0)
         # Log determinant of q covariance:
         KL -= 0.5 * tf.reduce_sum(tf.log(tf.square(tf.diag_part(Lq))))
         KL += 0.5 * tf.reduce_sum(tf.square(Lq))  # Trace term.
