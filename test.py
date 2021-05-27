@@ -1,6 +1,7 @@
 import numpy as np
 import gpflow
 
+print("Warnning,The variance of the Gaussian likelihood must be strictly greater than 1e-06")
 x = np.linspace(0.0, 0.5)
 y = np.sin(x) + 1e-2*np.random.standard_normal(x.shape)
 
@@ -11,5 +12,5 @@ model = gpflow.models.GPR(data = (x,y),
                           kernel = gpflow.kernels.RBF(),
                           noise_variance = var_val)
 
-# gpflow.utilities.print_summary(model)
-print("Warnning,The variance of the Gaussian likelihood must be strictly greater than 1e-06")
+gpflow.utilities.print_summary(model)
+
