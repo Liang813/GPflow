@@ -24,11 +24,6 @@ kernel52_iso.lengthscales._array = np.array([0.01095283])     # critical lengths
 GPmodel = gpflow.models.GPR(D_X, Y, kernel52_iso)
 mean52_iso, vars52_iso = GPmodel.predict_f(X_test)  # posterior mean is all nan
 
-K52_iso = kernel52_iso.K(D_X)
-gg = K52_iso.graph
-sess = tf.InteractiveSession(graph=gg)
-npK52_iso = K52_iso.eval(session=sess)  # Covariance matrix contains nan
-
 # Matern52 test ARD
 kernel52_ARD = gpflow.kernels.Matern52(input_dim=3, ARD=True)
 kernel52_ARD.lengthscales._array = np.array([0.01095283, 0.01095283, 0.01095283])     # critical lengthscales
