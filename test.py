@@ -31,10 +31,6 @@ kernel52_ARD.lengthscales._array = np.array([0.01095283, 0.01095283, 0.01095283]
 GPmodel = gpflow.models.GPR(D_X, Y, kernel52_ARD)
 mean52_ARD, vars52_ARD = GPmodel.predict_f(X_test)
 
-K52_ARD = kernel52_ARD.K(D_X)
-gg = K52_ARD.graph
-sess = tf.InteractiveSession(graph=gg)
-npK52_ARD = K52_ARD.eval(session=sess)
 
 # Matern32 test isotropic
 kernel32_iso = gpflow.kernels.Matern32(input_dim=3, ARD=False)
